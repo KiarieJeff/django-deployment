@@ -1,0 +1,28 @@
+{% extends 'web/base.html'%}
+{% block title %}{{movies.title}}{% endblock %}
+
+{% block body %}
+
+<h1>{{ genre }}</h1>
+<ul>
+  {% for movie in movies %}
+  <div class="col-sm-2 col-md-2 ">
+    <div class="thumbnail"style="border: 0;">
+        <h4>{{movie.title}}</h4>
+        <a href="{% url 'detail' movie.id %}">
+          <img src="{{ movie.movie_logo.url}}" class="img-responsive">
+      </a>
+      <h5>{{movie.genre}}</h5>
+      <div class="caption">
+
+          <!-- View Details -->
+          <a href="{% url 'detail' movie.id %}" class="btn btn-primary btn-sm" role="button">Give Rating</a>
+
+                        
+        </div>
+    </div>
+</div>
+  {% endfor %}
+</ul>
+
+{% endblock %}

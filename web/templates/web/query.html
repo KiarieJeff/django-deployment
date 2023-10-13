@@ -1,0 +1,67 @@
+{% extends 'web/base.html' %}
+
+{% block body %}
+<!-- <div class="search-section">
+    <div class="search-container" >
+        <div class="col-xs-6 col-xs-offset-3">
+            <form class="form-horizontal" role="search" method="get" action=''>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-lg" name="q" value="{{ request.GET.q }}" placeholder="Search Restaurants" />
+                        <span class='input-group-btn'>
+                            <button class='btn btn-info btn-lg' type='submit'>Search</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+<div class="movie-list-section">
+    <div class="container-fluid">
+        {% if movies %}
+        <div class="row">
+            {% for movie in movies %}
+            <div class="col-sm-2 col-md-2">
+                <div class="thumbnail" style="border: 0; background-color: #f0f0f0;">
+                    <h4>{{ movie.title }}</h4>
+                    <a href="{% url 'detail' movie.id %}">
+                        <img src="{{ movie.movie_logo.url }}" class="img-responsive">
+                    </a>
+                    <h5>{{ movie.genre }}</h5>
+                    <div class="caption" style="transition: box-shadow 0.3s;">
+                        <!-- View Details -->
+                        <a href="{% url 'detail' movie.id %}" class="btn btn-primary btn-sm" role="button">Give Rating</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'genre_list' %}" class="btn">
+        <button class="btn btn-info btn-lg">Browse by categories</button>
+    </a>
+    <a href="{% url 'recommend' %}" class="btn">
+        <button class="btn btn-info btn-lg">Recommend</button>
+    </a>
+</div>
+</div>
+<style>
+    .thumbnail:hover {
+        box-shadow: 0 0 10px rgba(120, 116, 116, 0.5);
+        /* You can adjust the values and color as needed */
+    }
+</style>
+{% endblock %}
